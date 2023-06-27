@@ -1,0 +1,13 @@
+com\nicode\gestionmatriculados\Service\DatosBancariosService.class
+com\nicode\gestionmatriculados\Service\DatosProfesionalesService.class
+com\nicode\gestionmatriculados\Controller\DatosProfesionalesController.class
+com\nicode\gestionmatriculados\Model\Matriculado.class
+com\nicode\gestionmatriculados\Service\MatriculadoService.class
+com\nicode\gestionmatriculados\Controller\DatosBancariosController.class
+com\nicode\gestionmatriculados\Controller\MatriculadoController.class
+com\nicode\gestionmatriculados\Repository\DatosBancariosRepository.class
+com\nicode\gestionmatriculados\Model\DatosProfesionales.class
+com\nicode\gestionmatriculados\Model\DatosBancarios.class
+com\nicode\gestionmatriculados\GestionMatriculadosApplication.class
+com\nicode\gestionmatriculados\Repository\DatosProfesionalesRepository.class
+com\nicode\gestionmatriculados\Repository\MatriculadoRepository.class

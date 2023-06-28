@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.nicode.gestionmatriculados.Controller;
 
 import com.nicode.gestionmatriculados.Model.DatosBancarios;
@@ -15,16 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-/**
- *
- * @author Nico
- */
 @Controller
 public class MatriculadoController {
     
@@ -37,7 +30,7 @@ public class MatriculadoController {
     @Autowired
     private DatosProfesionalesService datosProfesionalesService;
     
-    @RequestMapping("/")
+   @GetMapping("/")
     public String homePage(Model model, @Param("keyword") String keyword){
         List<Matriculado> matriculados = matriculadoService.getAll(keyword);
         
@@ -48,7 +41,7 @@ public class MatriculadoController {
         return "index";
     }
     
-    @RequestMapping("/view/{id}")
+    @GetMapping("/view/{id}")
     public ModelAndView viewMatriculado(@PathVariable(name = "id") Integer id){
         ModelAndView model = new ModelAndView("view_mat");
         
@@ -64,7 +57,7 @@ public class MatriculadoController {
         return model;
     }
     
-    @RequestMapping("/new")
+    @GetMapping("/new")
     public String newRegister(Model model){
         Matriculado matriculado = new Matriculado();
         //Se agrega el model para que en el HTML se pueda acceder a la lista y su contenido
@@ -73,14 +66,14 @@ public class MatriculadoController {
         return "new_mat";
     }
     
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    @PostMapping(value = "/save")
     public String saveMatriculado(@ModelAttribute("matriculado") Matriculado matriculado){
         matriculadoService.save(matriculado);
         
         return "redirect:/";
     }
     
-    @RequestMapping("/edit/{id}")
+    @GetMapping("/edit/{id}")
     public ModelAndView editMatriculado(@PathVariable(name = "id") Integer id){
         ModelAndView model = new ModelAndView("edit_mat");
         Matriculado matriculado = matriculadoService.getById(id);

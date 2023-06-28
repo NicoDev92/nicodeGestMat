@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.nicode.gestionmatriculados.Controller;
 
 import com.nicode.gestionmatriculados.Model.DatosBancarios;
@@ -11,16 +8,13 @@ import com.nicode.gestionmatriculados.Service.MatriculadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-/**
- *
- * @author Nico
- */
+
 @Controller
 public class DatosBancariosController {
 
@@ -30,7 +24,7 @@ public class DatosBancariosController {
     @Autowired
     private MatriculadoService matriculadoService;
 
-    @RequestMapping("/newBankData/{id}")
+    @GetMapping("/newBankData/{id}")
     public String newBankData(Model model, @PathVariable(name = "id") Integer id) {
         Matriculado matriculado = matriculadoService.getById(id);
         DatosBancarios datosBancarios = new DatosBancarios();
@@ -40,14 +34,14 @@ public class DatosBancariosController {
         return "new_bankData";
     }
 
-    @RequestMapping(value = "/saveBD", method = RequestMethod.POST)
+     @PostMapping("/saveBD")
     public String saveBankData(@ModelAttribute("datosBancarios") DatosBancarios datosBancarios) {
         datosBancariosService.save(datosBancarios);
 
         return "redirect:/";
     }
 
-    @RequestMapping("/editBD/{id}")
+   @GetMapping("/editBD/{id}")
     public ModelAndView editMatriculado(@PathVariable(name = "id") Integer id) {
         ModelAndView model = new ModelAndView("edit_bd");
         DatosBancarios datosBancarios = datosBancariosService.getById(id);
@@ -56,7 +50,7 @@ public class DatosBancariosController {
         return model;
     }
 
-    @RequestMapping("/delDB/{id}")
+    @GetMapping("/delDB/{id}")
     public String deleteDatosBancarios(@PathVariable(name = "id") Integer id) {
         datosBancariosService.deleteById(id);
         return "redirect:/";

@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.nicode.gestionmatriculados.Controller;
 
 import com.nicode.gestionmatriculados.Model.DatosProfesionales;
@@ -11,16 +8,12 @@ import com.nicode.gestionmatriculados.Service.MatriculadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-/**
- *
- * @author Nico
- */
 @Controller
 public class DatosProfesionalesController {
 
@@ -30,7 +23,7 @@ public class DatosProfesionalesController {
     @Autowired
     private MatriculadoService matriculadoService;
 
-    @RequestMapping("/newProfessionalData/{id}")
+    @GetMapping("/newProfessionalData/{id}")
     public String newProfessionalData(Model model, @PathVariable(name = "id") Integer id) {
         DatosProfesionales datosProfesionales = new DatosProfesionales();
         Matriculado matriculado = matriculadoService.getById(id);
@@ -41,14 +34,14 @@ public class DatosProfesionalesController {
         return "new_dp";
     }
 
-    @RequestMapping(value = "/saveDP", method = RequestMethod.POST)
+    @PostMapping(value = "/saveDP")
     public String saveProfesionalData(@ModelAttribute("datosProfesionales") DatosProfesionales datosProfesionales) {
         datosProfesionalesService.save(datosProfesionales);
 
         return "redirect:/";
     }
 
-    @RequestMapping("/editPD/{id}")
+    @GetMapping("/editPD/{id}")
     public ModelAndView editMatriculado(@PathVariable(name = "id") Integer id) {
         ModelAndView model = new ModelAndView("edit_dp");
         DatosProfesionales datosProfesionales = datosProfesionalesService.getById(id);
@@ -57,7 +50,7 @@ public class DatosProfesionalesController {
         return model;
     }
     
-    @RequestMapping("/delDP/{id}")
+    @GetMapping("/delDP/{id}")
     public String deleteDatosProfesionales(@PathVariable(name = "id") Integer id){
         datosProfesionalesService.deleteById(id);
         return "redirect:/";
